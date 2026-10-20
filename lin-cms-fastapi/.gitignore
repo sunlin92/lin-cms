@@ -4,7 +4,7 @@ __pycache__/
 .env
 data/
 assets/
-logs/
+/logs/
 *.db
 .pytest_cache/
 .ruff_cache/
