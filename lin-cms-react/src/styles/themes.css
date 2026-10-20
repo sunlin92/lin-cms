@@ -1,0 +1,57 @@
+/*
+ * 主题预设：切换主色 hue。
+ * 通过 <html data-theme="lin-classic|book-ink|palace-vermilion|ru-yao-celadon"> 生效，
+ * 深色模式叠加 .dark class。选择器使用 html[data-theme=...] 以保证优先级高于 :root/.dark。
+ */
+
+/* 靛青 · Lin Classic（默认） */
+html[data-theme="lin-classic"] {
+  --primary: #355c85;
+  --primary-foreground: #ffffff;
+  --ring: #355c85;
+}
+
+html.dark[data-theme="lin-classic"] {
+  --primary: #7fa8dc;
+  --primary-foreground: #10161f;
+  --ring: #7fa8dc;
+}
+
+/* 栗褐 · Book Ink */
+html[data-theme="book-ink"] {
+  --primary: #7a5230;
+  --primary-foreground: #ffffff;
+  --ring: #7a5230;
+}
+
+html.dark[data-theme="book-ink"] {
+  --primary: #c9a47e;
+  --primary-foreground: #1c1206;
+  --ring: #c9a47e;
+}
+
+/* 胭脂 · Palace Vermilion */
+html[data-theme="palace-vermilion"] {
+  --primary: #a64b55;
+  --primary-foreground: #ffffff;
+  --ring: #a64b55;
+}
+
+html.dark[data-theme="palace-vermilion"] {
+  --primary: #d9909a;
+  --primary-foreground: #201014;
+  --ring: #d9909a;
+}
+
+/* 黛绿 · Ru Yao Celadon */
+html[data-theme="ru-yao-celadon"] {
+  --primary: #48655a;
+  --primary-foreground: #ffffff;
+  --ring: #48655a;
+}
+
+html.dark[data-theme="ru-yao-celadon"] {
+  --primary: #93b5a7;
+  --primary-foreground: #0e1712;
+  --ring: #93b5a7;
+}

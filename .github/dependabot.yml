@@ -1,0 +1,20 @@
+# 依赖更新：三工程 + CI 所用 Actions。
+# 生态标识核对自 GitHub Dependabot options reference（uv / npm / gomod / github-actions）。
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/lin-cms-fastapi"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/lin-cms-react"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "gomod"
+    directory: "/lin-cms-cli"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

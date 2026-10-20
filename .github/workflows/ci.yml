@@ -1,0 +1,54 @@
+# 三工程测试/静态检查 + OpenAPI 契约漂移门禁。
+# 命令统一走根 Makefile（与本地完全一致，单一事实源）；未纳入：E2E、安全扫描、docker（见 docs/02 §6）。
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: lin-cms-fastapi } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: cp .env.example .env && sed -i 's/^LIN_SECRET_KEY=.*/LIN_SECRET_KEY=ci-only-secret-key-32bytes-minimum/' .env
+      - run: uv sync
+      - run: uv run pytest
+      - run: uvx ruff check app tests scripts
+      - run: uvx ruff format --check app tests scripts
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+          cache-dependency-path: lin-cms-react/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: lin-cms-react
+      - run: make frontend-test frontend-typecheck frontend-lint frontend-build
+
+  cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: lin-cms-cli/go.mod
+      - run: make cli-test cli-lint
+      - run: cd lin-cms-cli && go build ./...
+
+  contract-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: cd lin-cms-fastapi && uv sync && cp .env.example .env && sed -i 's/^LIN_SECRET_KEY=.*/LIN_SECRET_KEY=ci-only-secret-key-32bytes-minimum/' .env
+      - run: make backend-openapi
+      - run: git diff --exit-code contracts/openapi.json

@@ -1,0 +1,43 @@
+name: Bug 报告
+description: 报告一个可复现的问题
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢报告。请先确认问题在最新 main 分支上仍可复现，并尽量写清复现步骤。
+  - type: dropdown
+    id: component
+    attributes:
+      label: 影响组件
+      options:
+        - 后端（lin-cms-fastapi）
+        - 前端（lin-cms-react）
+        - CLI（lin-cms-cli）
+        - 工程化（Makefile / CI）
+        - 文档 / 契约
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 问题描述
+      description: 实际发生了什么，期望是什么
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: 环境信息
+      description: 操作系统、相关版本（Python / Node / Go）、浏览器（涉及前端时）
+    validations:
+      required: false

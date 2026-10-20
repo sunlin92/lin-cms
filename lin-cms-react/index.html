@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="lin-classic">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lin CMS</title>
+    <script>
+      // 在首帧渲染前恢复主题，避免闪烁
+      ;(() => {
+        try {
+          const raw = window.localStorage.getItem('lin-cms:theme')
+          if (!raw) return
+          const state = JSON.parse(raw).state
+          if (!state) return
+          const root = document.documentElement
+          if (typeof state.themeId === 'string') root.dataset.theme = state.themeId
+          if (state.isDark === true) root.classList.add('dark')
+        } catch {
+          /* 忽略损坏的主题配置 */
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 项目文档
+    url: https://github.com/sunlin92/lin-cms/tree/main/docs
+    about: 使用与设计问题先查规划文档（需求澄清 / 规划计划书 / 实施方案）。

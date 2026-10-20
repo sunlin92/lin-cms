@@ -1,0 +1,25 @@
+# 工作区根（各工程目录内另有自己的 .gitignore，规则叠加生效）
+.DS_Store
+*.swp
+*.sw?
+
+# 本地工具与会话状态，不入库
+.superpowers/
+.v2c/
+
+# 密钥与环境（.env.example / .env.e2e / .env.production 需入库，勿用通配）
+.env
+
+# 通用依赖与构建产物兜底（各工程 .gitignore 已覆盖自身目录）
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.py[cod]
+*.tsbuildinfo
+htmlcov/
+.coverage
+coverage.xml
+coverage/
+test-results/
+playwright-report/
