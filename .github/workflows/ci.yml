@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: lin-cms-fastapi } }
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - run: cp .env.example .env && sed -i 's/^LIN_SECRET_KEY=.*/LIN_SECRET_KEY=ci-only-secret-key-32bytes-minimum/' .env
       - run: uv sync
       - run: uv run pytest
@@ -23,11 +23,11 @@ jobs:
   frontend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
         with:
           package_json_file: lin-cms-react/package.json
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: lts/*
           cache: pnpm
@@ -39,8 +39,8 @@ jobs:
   cli:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
         with:
           go-version-file: lin-cms-cli/go.mod
       - run: make cli-test cli-lint
@@ -49,8 +49,8 @@ jobs:
   contract-drift:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - run: cd lin-cms-fastapi && uv sync && cp .env.example .env && sed -i 's/^LIN_SECRET_KEY=.*/LIN_SECRET_KEY=ci-only-secret-key-32bytes-minimum/' .env
       - run: make backend-openapi
       - run: git diff --exit-code contracts/openapi.json
