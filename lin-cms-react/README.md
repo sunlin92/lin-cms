@@ -24,13 +24,13 @@ pnpm dev        # http://localhost:5173，请求 VITE_API_BASE_URL（默认 http
 
 ## 命令
 
-| 命令 | 说明 |
-| --- | --- |
-| `pnpm dev` | 开发服务器 |
-| `pnpm build` | 生产构建（读 `.env.production` 的 `VITE_API_BASE_URL`） |
-| `pnpm test` | Vitest 单元/组件测试（60 用例；e2e 目录已排除） |
-| `pnpm test:e2e` | Playwright E2E（4 条主流程；自动拉起后端 8765 + preview 4173，独立 SQLite） |
-| `pnpm typecheck` / `pnpm lint` | tsc -b / Biome（`lint:fix` 自动修复格式与 import 排序） |
+| 命令                           | 说明                                                                        |
+| ------------------------------ | --------------------------------------------------------------------------- |
+| `pnpm dev`                     | 开发服务器                                                                  |
+| `pnpm build`                   | 生产构建（读 `.env.production` 的 `VITE_API_BASE_URL`）                     |
+| `pnpm test`                    | Vitest 单元/组件测试（60 用例；e2e 目录已排除）                             |
+| `pnpm test:e2e`                | Playwright E2E（4 条主流程；自动拉起后端 8765 + preview 4173，独立 SQLite） |
+| `pnpm typecheck` / `pnpm lint` | tsc -b / Biome（`lint:fix` 自动修复格式与 import 排序）                     |
 
 E2E 说明：端口 8000/8001 可能被其他项目占用，E2E 固定使用 8765（`.env.e2e` + `--mode e2e` 构建）；首跑需 `pnpm exec playwright install chromium`。
 
